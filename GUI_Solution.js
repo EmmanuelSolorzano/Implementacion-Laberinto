@@ -1,45 +1,58 @@
-// Given the following CSV file called "mammals.csv"
-// located in the project's "assets" folder:
-//
-// id,species,name
-// 0,Capra hircus,Goat
-// 1,Panthera pardus,Leopard
-// 2,Equus zebra,Zebra
-
-let table;
+let solution;
+let problem;
 
 function preload() {
-  //my table is comma separated value "csv"
-  //and has a header specifying the columns labels
-  table = loadTable('data.csv', 'csv', 'header');
-  //the file can be remote
-  //table = loadTable("http://p5js.org/reference/assets/mammals.csv",
-  //                  "csv", "header");
-}
-
-function setup() {
-  createCanvas(960,540);
-  background(220);
+  solution = loadTable('solution.csv', 'csv');
+  problem = loadTable('problem.csv', 'csv');
 }
 
 
-STARTPOSX = 40;
-STARTPOSY = 40;
 
-function draw(){
-  
-
+function graphicLabyrinth(table){
   for (let r = 0; r < table.getRowCount(); r++){
     for (let c = 0; c < table.getColumnCount(); c++) {
-      if(table.getString(r, c) == '0'){
+      if(table.getString(r, c) == "0"){
         fill(1);
         stroke(127, 63, 120);
-        rect(STARTPOSX, STARTPOSY, 40, 40);
-        STARTPOSX+=60;
+        rect(POS[0], POS[1], SQUARESIZE[0], SQUARESIZE[1]);      
       }     
+      else{
+        fill(127, 63, 120);
+        stroke(127, 63, 120);
+        rect(POS[0], POS[1], SQUARESIZE[0], SQUARESIZE[1]);
+      }
+      POS[0] += SEPARATION;
     }
-    STARTPOSX = 40;
-    STARTPOSY+=60;
+    POS[0] = STARTPOSX;
+    POS[1] += SEPARATION;
   }
-  
 }
+
+
+
+
+function setup() { 
+  createCanvas(1380,770);
+  background(220);
+
+  STARTPOSX = 740;
+  STARTPOSY = 40;
+  POS = [STARTPOSX,STARTPOSY];
+  SQUARESIZE = [40,40];
+  SEPARATION = 40;  
+  graphicLabyrinth(solution,STARTPOSX,STARTPOSY,POS,SQUARESIZE,SEPARATION);
+
+  STARTPOSX = 40;
+  STARTPOSY = 40;
+  POS = [STARTPOSX,STARTPOSY];
+  SQUARESIZE = [40,40];
+  SEPARATION = 40;  
+  graphicLabyrinth(problem,STARTPOSX,STARTPOSY,POS,SQUARESIZE,SEPARATION);
+}
+
+
+
+/*
+function draw(){
+  
+}*/
