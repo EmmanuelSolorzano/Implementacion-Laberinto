@@ -6,53 +6,47 @@ function preload() {
   problem = loadTable('problem.csv', 'csv');
 }
 
-
-
-function graphicLabyrinth(table){
-  for (let r = 0; r < table.getRowCount(); r++){
-    for (let c = 0; c < table.getColumnCount(); c++) {
-      if(table.getString(r, c) == "0"){
-        fill(1);
-        stroke(127, 63, 120);
-        rect(POS[0], POS[1], SQUARESIZE[0], SQUARESIZE[1]);      
+function graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,ignoreSolution){
+  for (let r = 0; r < problem.getRowCount(); r++){
+    for (let c = 0; c < problem.getColumnCount(); c++) {
+      if(problem.getString(r, c) == "0"){
+        fill(1);           
       }     
       else{
-        fill(127, 63, 120);
-        stroke(127, 63, 120);
-        rect(POS[0], POS[1], SQUARESIZE[0], SQUARESIZE[1]);
+        if((solution.getString(r, c) == "1") && (ignoreSolution == 0)){
+          fill(0, 206, 209);
+        }
+        else{
+          fill(127, 63, 120);
+        }      
       }
-      POS[0] += SEPARATION;
+      stroke(127, 63, 120);
+      rect(pos[0], pos[1], squareSize[0], squareSize[1]);   
+      pos[0] += separation;
     }
-    POS[0] = STARTPOSX;
-    POS[1] += SEPARATION;
+    pos[0] = startPosX;
+    pos[1] += separation;
   }
 }
 
-
-
-
 function setup() { 
   createCanvas(1380,770);
-  background(220);
+  background(220, 220, 220);
 
-  STARTPOSX = 740;
-  STARTPOSY = 40;
-  POS = [STARTPOSX,STARTPOSY];
-  SQUARESIZE = [40,40];
-  SEPARATION = 40;  
-  graphicLabyrinth(solution,STARTPOSX,STARTPOSY,POS,SQUARESIZE,SEPARATION);
+  let ignoreSolution = 0;
 
-  STARTPOSX = 40;
-  STARTPOSY = 40;
-  POS = [STARTPOSX,STARTPOSY];
-  SQUARESIZE = [40,40];
-  SEPARATION = 40;  
-  graphicLabyrinth(problem,STARTPOSX,STARTPOSY,POS,SQUARESIZE,SEPARATION);
+  let startPosX = 750;
+  let startPosY = 40;
+  let pos = [startPosX,startPosY];
+  let squareSize = [40,40];
+  let separation = 40;  
+  graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,ignoreSolution);
+
+  ignoreSolution++;
+  startPosX = 50;
+  startPosY = 40;
+  pos = [startPosX,startPosY];
+  squareSize = [40,40];
+  separation = 40;  
+  graphicLabyrinth(problem,problem,startPosX,pos,squareSize,separation,ignoreSolution);
 }
-
-
-
-/*
-function draw(){
-  
-}*/
