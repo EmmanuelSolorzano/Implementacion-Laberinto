@@ -2,8 +2,8 @@ let solution;
 let problem;
 
 function preload() {
-  solution = loadTable('solution.csv', 'csv');
-  problem = loadTable('problem.csv', 'csv');
+  solution = loadTable('GUI_CSV/solution.csv', 'csv');
+  problem = loadTable('GUI_CSV/problem.csv', 'csv');
 }
 
 function graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,ignoreSolution){
@@ -11,23 +11,16 @@ function graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,i
     for (let c = 0; c < problem.getColumnCount(); c++) {
       if(problem.getString(r, c) == "0"){
         fill(1);           
-      }     
+      }
+      else if(problem.getString(r, c) == "2"){
+        fill(0, 255, 0);
+      }
       else{
         if((solution.getString(r, c) == "1") && (ignoreSolution == 0)){
-          if(r == 0 || r == problem.getRowCount()-1 || c == 0 || c == problem.getColumnCount()-1){
-            fill(0, 255, 0);            
-          }
-          else{
-            fill(0, 206, 209);
-          }      
+          fill(0, 206, 209);
         }
         else{
-          if(r == 0 || r == problem.getRowCount()-1 || c == 0 || c == problem.getColumnCount()-1){
-            fill(0, 255, 0);            
-          }
-          else{
-            fill(127, 63, 120);
-          }         
+          fill(127, 63, 120);
         }      
       }
       stroke(127, 63, 120);
