@@ -14,10 +14,20 @@ function graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,i
       }     
       else{
         if((solution.getString(r, c) == "1") && (ignoreSolution == 0)){
-          fill(0, 206, 209);
+          if(r == 0 || r == problem.getRowCount()-1 || c == 0 || c == problem.getColumnCount()-1){
+            fill(0, 255, 0);            
+          }
+          else{
+            fill(0, 206, 209);
+          }      
         }
         else{
-          fill(127, 63, 120);
+          if(r == 0 || r == problem.getRowCount()-1 || c == 0 || c == problem.getColumnCount()-1){
+            fill(0, 255, 0);            
+          }
+          else{
+            fill(127, 63, 120);
+          }         
         }      
       }
       stroke(127, 63, 120);
