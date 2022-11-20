@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     /*
     string path;
-    cout<<"Introduzca el nombre del archivo CSV a resolver:"<<endl;
+    cout<<"Introduzca el nombre del archivo CSV a resolver: (SUGERENCIA: problem.csv) "<<endl;
     cin>> path;
     Labyrinth labyrinth(path);*/
     Labyrinth labyrinth("problem.csv");

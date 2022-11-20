@@ -6,7 +6,7 @@ function preload() {
   problem = loadTable('GUI_CSV/problem.csv', 'csv');
 }
 
-function graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,ignoreSolution){
+function graphicLabyrinth(problem,solution,startactualPosX,pos,squareSize,separation,ignoreSolution){
   for (let r = 0; r < problem.getRowCount(); r++){
     for (let c = 0; c < problem.getColumnCount(); c++) {
       if(problem.getString(r, c) == "0"){
@@ -27,7 +27,7 @@ function graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,i
       rect(pos[0], pos[1], squareSize[0], squareSize[1]);   
       pos[0] += separation;
     }
-    pos[0] = startPosX;
+    pos[0] = startactualPosX;
     pos[1] += separation;
   }
 }
@@ -38,18 +38,18 @@ function setup() {
 
   let ignoreSolution = 0;
 
-  let startPosX = 750;
+  let startactualPosX = 750;
   let startPosY = 40;
-  let pos = [startPosX,startPosY];
+  let pos = [startactualPosX,startPosY];
   let squareSize = [40,40];
   let separation = 40;  
-  graphicLabyrinth(problem,solution,startPosX,pos,squareSize,separation,ignoreSolution);
+  graphicLabyrinth(problem,solution,startactualPosX,pos,squareSize,separation,ignoreSolution);
 
   ignoreSolution++;
-  startPosX = 50;
+  startactualPosX = 50;
   startPosY = 40;
-  pos = [startPosX,startPosY];
+  pos = [startactualPosX,startPosY];
   squareSize = [40,40];
   separation = 40;  
-  graphicLabyrinth(problem,problem,startPosX,pos,squareSize,separation,ignoreSolution);
+  graphicLabyrinth(problem,problem,startactualPosX,pos,squareSize,separation,ignoreSolution);
 }

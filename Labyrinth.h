@@ -19,7 +19,7 @@ public:
     void printLabyrinth();
     void printSolution();
     void createGuiCsv();
-    void solution();
+    void solution(int posX, int posY);
     void defineStartEnd(int startC[2], int endC[2]);
 };
 
@@ -70,8 +70,61 @@ void Labyrinth::printSolution(){
 }
 
 //TO DO
-void Labyrinth::solution(){
+void Labyrinth::solution(int posX, int posY){
+    vector< vector<int> > auxMatrix = solutionMatrix;
+    bool canLeft,canRight,canUp,canDown;
+    bool canRoadLeft,canRoadRight,canRoadUp,canRoadDown;
+    int actualPosX = posX;
+    int actualPosY = posY;
+
+    while((actualPosX != endCoordinates[0]) && (actualPosY != endCoordinates[1])){
+        if (actualPosX-1 != -1){
+            canLeft = true;
+        }
+        if (actualPosX+1 != solutionMatrix[1].size()+1){
+            canRight = true;
+        }
+        if (actualPosY-1 != -1){
+            canUp = true;
+        }
+        if (actualPosY-1 != solutionMatrix.size()+1){
+            canDown = true;
+        }
+        if (canDown){
+            if (labyrinthMatrix[actualPosX][actualPosY+1] == 1){
+                canRoadDown = true;
+            }         
+        }
+        if (canUp){
+            if (labyrinthMatrix[actualPosX][actualPosY-1] == 1){
+                canRoadUp = true;
+            }         
+        }
+        if (canRight){
+            if (labyrinthMatrix[actualPosX+1][actualPosY] == 1){
+                canRoadRight = true;
+            }         
+        }
+        if (canLeft){
+            if (labyrinthMatrix[actualPosX-1][actualPosY] == 1){
+                canRoadLeft = true;
+            }         
+        }
+
+
+
+        if (canRoadDown){
+            auxMatrix[actualPosX][actualPosY] = 4;
+            solution(actualPosX,actualPosY+1);
+        }
+        
+        
+
+
+        
+    }
     
+
 }
 
 void Labyrinth::createGuiCsv(){
